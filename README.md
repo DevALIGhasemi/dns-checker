@@ -1,102 +1,132 @@
-# DNS Optimizer for Linux
+# DNS Manager v2.0 (Linux)
 
-A simple Python tool to automatically **find the fastest DNS servers** for your network and apply them to your chosen interface.  
-It also allows you to **revert DNS settings** back to automatic (via DHCP).
+A powerful and clean Python tool to **test, optimize, and manage DNS servers on Linux systems**.  
+This tool automatically benchmarks DNS servers, selects the fastest ones, and applies them to your chosen network interface using `systemd-resolved`.
 
 ---
 
-## 🖥️ Supported Distributions
-This script works on Linux distributions that use **systemd-resolved**, such as:
-- Ubuntu (18.04+)
-- Debian (10+)
+## 🖥️ Supported Systems
+
+This project works on **Linux distributions that use `systemd-resolved`**, including:
+
+- Ubuntu 18.04+
+- Debian 10+
 - Fedora
 - Arch Linux
 - Manjaro
 - Pop!_OS
 
-> ⚠️ It will not work on minimal distros without `systemd`.
-
----
-
-## 📂 Project Structure
-```
-dns-checker/
-├── run.py        # Main script
-├── list.txt      # DNS server list (one IP per line)
-└── README.md     # Project documentation
-```
-
----
-
-## 🚀 Installation & Usage
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/DEVALIGhasemi/dns-checker.git
-   cd dns-checker/
-   ```
-
-2. Install dependencies:
-   ```bash
-   sudo apt update
-   sudo apt install python3 python3-pip -y
-   pip install dnspython
-   ```
-
-3. Edit `list.txt` and add your preferred DNS servers (one IP per line).
-
-4. Run the script:
-   ```bash
-   python3 run.py
-   ```
-
----
-
-## 📋 Menu Options
-When you start the program, you’ll see:
-
-```
-       Welcome
-----------------------
-[1] Set     DNS
-[2] Clean   DNS
-[9] About Me
-[0] Exit
-----------------------
-```
-
-- **[1] Set DNS** → Tests all DNS servers (with Google + Soft98) and applies the fastest ones to your chosen interface.  
-- **[2] Clean DNS** → Reverts DNS settings to default (automatic via DHCP).  
-- **[9] About Me** → Author information.  
-- **[0] Exit** → Exit the program.  
-
----
-
-## 📌 Example Run
-```bash
-python3 run.py
-
-Enter Number: 1
-
-Best DNS list: ['178.22.122.100', '185.51.200.2']
-<-------------------------------------->
-[1] eno1
-[2] wlp3s0
-<-------------------------------------->
-Enter number of interface: 2
-DNS applied on wlp3s0: 178.22.122.100, 185.51.200.2
-```
+⚠️ **Not supported** on systems without `systemd-resolved` or `resolvectl`.
 
 ---
 
 ## ✨ Features
-- Tests DNS servers against both local and global domains.  
-- Automatically selects the fastest DNS servers.  
-- Supports multiple network interfaces.  
-- One-click revert to automatic DNS (DHCP).  
-- Handles errors gracefully and supports `CTRL+C` exit.
+
+- 🚀 Automatic DNS speed testing
+- 📊 Benchmarks DNS servers using real domain queries
+- ⚡ Selects the fastest DNS servers automatically
+- 🌐 Supports IPv4 and IPv6
+- 🧠 Clean OOP-based architecture
+- 🔌 Interface selection (Ethernet / Wi-Fi)
+- ♻️ One-command DNS revert (back to DHCP)
+- 🛑 Robust error handling
+- 🧪 Standalone DNS speed test mode
+
+---
+
+## 📂 Project Structure
+
+```
+dns-manager/
+├── run.py        # Main application
+├── list.txt      # DNS servers list (IPv4 / IPv6)
+└── README.md     # Documentation
+```
+
+---
+
+## 📦 Requirements
+
+- Python 3.8+
+- systemd-resolved
+- sudo access
+
+### Python Dependencies
+
+```bash
+pip install dnspython
+```
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/DEVALIGhasemi/dns-checker.git
+cd dns-checker
+```
+
+Edit `list.txt` and add DNS servers (one per line):
+
+```txt
+1.1.1.1
+8.8.8.8
+178.22.122.100
+2606:4700:4700::1111
+```
+
+---
+
+## ▶️ Usage
+
+```bash
+python3 run.py
+```
+
+Menu:
+
+```
+DNS Manager
+----------------------
+[1] Set DNS
+[2] Clean DNS
+[3] Test DNS Speed
+[9] About
+[0] Exit
+----------------------
+```
+
+---
+
+## 📋 Menu Options
+
+### [1] Set DNS
+Tests all DNS servers and applies the 2 fastest ones to the selected interface.
+
+### [2] Clean DNS
+Reverts DNS settings to automatic (DHCP).
+
+### [3] Test DNS Speed
+Tests DNS servers without applying changes.
+
+---
+
+## 🔐 Permissions
+
+DNS modification requires sudo privileges.
+
+```bash
+sudo python3 run.py
+```
 
 ---
 
 ## 👨‍💻 Author
-Created by **ALI Ghasemi**
+
+**ALI Ghasemi**  
+
+---
+
+## 📄 License
+
+MIT License
